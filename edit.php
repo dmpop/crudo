@@ -38,7 +38,7 @@ include('config.php');
 		}
 		?>
 		<?php
-		if ($_POST["save"]) {
+		if (isset($_POST["save"])) {
 			if ($_POST['passwd'] != $password) {
 				echo '<p>Wrong password.</p>';
 				exit();
@@ -47,7 +47,7 @@ include('config.php');
 			echo '<div style="margin-bottom: 2em;">Changes have been saved</div>';
 		};
 		?>
-		<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+		<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
 			<div>
 				<textarea name="text"><?php Read(); ?></textarea>
 			</div>

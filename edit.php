@@ -10,18 +10,28 @@ include('config.php');
 	<meta charset="utf-8">
 	<title><?php echo $title; ?></title>
 	<link rel="shortcut icon" href="favicon.png" />
-	<link rel="stylesheet" href="css/milligram.min.css">
-	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/classless.css" />
+	<link rel="stylesheet" href="css/themes.css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		textarea {
+			font-size: 15px;
+			width: 100%;
+			height: 15em;
+			line-height: 1.9;
+			margin-top: 1em;
+		}
+	</style>
 </head>
 
 <body>
-	<div id="content">
-		<h1 style="display: inline; margin-left: 0.19em; vertical-align: middle; letter-spacing: 3px; margin-top: 0em;"><?php echo $title; ?></h1>
-		<hr>
-		<form method="GET" action="index.php">
-			<p><button type="submit">Back</button></p>
-		</form>
+	<div class="card text-center">
+		<div style="margin-top: 1em; margin-bottom: 1em;">
+			<img style="display: inline; height: 2.5em; vertical-align: middle;" src="favicon.svg" alt="logo" />
+			<h1 style="display: inline; margin-top: 0em; vertical-align: middle; letter-spacing: 3px;"><?php echo $title; ?></h1>
+		</div>
+		<hr style="margin-bottom: 1em;">
+		<button onclick="location.href='index.php'">Back</button>
 		<?php
 		function Read()
 		{
@@ -39,7 +49,7 @@ include('config.php');
 		?>
 		<?php
 		if (isset($_POST["save"])) {
-			if ($_POST['passwd'] != $password) {
+			if ($_POST['password'] != $password) {
 				echo '<p>Wrong password.</p>';
 				exit();
 			}
@@ -55,11 +65,13 @@ include('config.php');
 				<label for='password'>Password:</label>
 			</div>
 			<div>
-				<input type="password" name="passwd" style="width: 90%; max-width: 75%;">
+				<input type="password" name="password">
 			</div>
-			<input type="submit" name="save" value="Save">
+			<button type="submit" name="save">Save</button>
 		</form>
-		<p><?php echo $footer; ?></p>
+	</div>
+	<div class="text-center">
+		<?php echo $footer; ?>
 	</div>
 </body>
 

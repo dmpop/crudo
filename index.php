@@ -7,18 +7,27 @@ include('config.php');
          License: GPLv3 https://www.gnu.org/licenses/gpl-3.0.txt -->
 
 <head>
-	<meta charset="utf-8">
 	<title><?php echo $title; ?></title>
+	<meta charset="utf-8">
 	<link rel="shortcut icon" href="favicon.png" />
-	<link rel="stylesheet" href="css/milligram.min.css">
-	<link rel="stylesheet" href="css/styles.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/classless.css" />
+	<link rel="stylesheet" href="css/themes.css" />
+	<!-- Suppress form re-submit prompt on refresh -->
+	<script>
+		if (window.history.replaceState) {
+			window.history.replaceState(null, null, window.location.href);
+		}
+	</script>
 </head>
 
 <body>
-	<div id="content">
-		<h1 style="display: inline; margin-left: 0.19em; vertical-align: middle; letter-spacing: 3px; margin-top: 0em;"><?php echo $title; ?></h1>
-		<hr>
+	<div class="card text-center">
+		<div style="margin-top: 1em; margin-bottom: 1em;">
+			<img style="display: inline; height: 2.5em; vertical-align: middle;" src="favicon.svg" alt="logo" />
+			<h1 style="display: inline; margin-top: 0em; vertical-align: middle; letter-spacing: 3px;"><?php echo $title; ?></h1>
+		</div>
+		<hr style="margin-bottom: 2em;">
 		<table id="theTable">
 			<?php
 			$csv_file = "data.csv";
@@ -44,7 +53,7 @@ include('config.php');
 						if ($row == 1) {
 							echo '<th "sortable" onclick="sortTable(' . $c . ')">' . $value . '</th>';
 						} else {
-							echo '<td>' . $value . '</td>';
+							echo '<td class="text-left">' . $value . '</td>';
 						}
 					}
 					if ($row == 1) {
@@ -59,10 +68,10 @@ include('config.php');
 			?>
 			</tbody>
 		</table>
-		<form method='GET' action='edit.php'>
-			<p style="margin-top: 1.5em;"><button type='submit'>Edit</button></p>
-		</form>
-		<p><?php echo $footer; ?></p>
+		<button style="margin-bottom: 1.5em;" onclick="location.href='edit.php'">Edit</button>
+	</div>
+	<div class="text-center">
+		<?php echo $footer; ?>
 	</div>
 	<script>
 		function sortTable(n) {

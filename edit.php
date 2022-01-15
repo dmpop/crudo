@@ -31,7 +31,7 @@ include('config.php');
 			<h1 style="display: inline; margin-top: 0em; vertical-align: middle; letter-spacing: 3px;"><?php echo $title; ?></h1>
 		</div>
 		<hr style="margin-bottom: 1em;">
-		<button onclick="location.href='index.php'">Back</button>
+		<button title="Back" onclick="location.href='index.php'"><img style='vertical-align: middle;' src='svg/back.svg' /></button>
 		<?php
 		function Read()
 		{
@@ -67,7 +67,7 @@ include('config.php');
 			<div>
 				<input type="password" name="password">
 			</div>
-			<button type="submit" name="save">Save</button>
+			<button title="Save changes" type="submit" name="save"><img style='vertical-align: middle;' src='svg/save.svg' /></button>
 		</form>
 	</div>
 	<div class="text-center">

@@ -68,10 +68,10 @@ include('config.php');
 			?>
 			</tbody>
 		</table>
-		<button style="margin-bottom: 1.5em;" onclick="location.href='edit.php'">Edit</button>
-	</div>
-	<div class="text-center">
-		<?php echo $footer; ?>
+		<button style="margin-bottom: 1.5em;" title="Edit link list" onclick='window.location.href = "edit.php"'><img style='vertical-align: middle;' src='svg/edit.svg' /></button>
+		<div style="margin-bottom: 1em;">
+			<?php echo $footer; ?>
+		</div>
 	</div>
 	<script>
 		function sortTable(n) {

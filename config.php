@@ -1,6 +1,10 @@
 <?php
 // Title
 $title = "Crudo";
+// Theme
+$theme = "dark";
+// Data file
+$csv_file = "data.csv";
 // Delimiter
 $delimiter = ";";
 // Password

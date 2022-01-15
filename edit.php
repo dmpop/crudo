@@ -2,7 +2,8 @@
 include('config.php');
 ?>
 
-<html lang='en'>
+<!DOCTYPE html>
+<html lang="en" data-theme="<?php echo $theme; ?>">
 <!-- Author: Dmitri Popov, dmpop@linux.com
          License: GPLv3 https://www.gnu.org/licenses/gpl-3.0.txt -->
 
@@ -35,16 +36,14 @@ include('config.php');
 		<?php
 		function Read()
 		{
-			$CSVFILE = "data.csv";
-			echo file_get_contents($CSVFILE);
+			global $csv_file;
+			echo file_get_contents($csv_file);
 		}
 		function Write()
 		{
-			$CSVFILE = "data.csv";
-			$fp = fopen($CSVFILE, "w");
+			global $csv_file;
 			$data = $_POST["text"];
-			fwrite($fp, $data);
-			fclose($fp);
+			file_put_contents($csv_file, $data);
 		}
 		?>
 		<?php
@@ -69,9 +68,9 @@ include('config.php');
 			</div>
 			<button title="Save changes" type="submit" name="save"><img style='vertical-align: middle;' src='svg/save.svg' /></button>
 		</form>
-	</div>
-	<div class="text-center">
-		<?php echo $footer; ?>
+		<div style="margin-bottom: 1em;">
+			<?php echo $footer; ?>
+		</div>
 	</div>
 </body>
 

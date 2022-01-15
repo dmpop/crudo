@@ -2,7 +2,8 @@
 include('config.php');
 ?>
 
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="<?php echo $theme; ?>">
 <!-- Author: Dmitri Popov, dmpop@linux.com
          License: GPLv3 https://www.gnu.org/licenses/gpl-3.0.txt -->
 

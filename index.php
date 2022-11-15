@@ -1,9 +1,12 @@
 <?php
 include('config.php');
+if ($protect) {
+	require_once('protect.php');
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en" data-theme="<?php echo $theme; ?>">
+<html lang="en">
 <!-- Author: Dmitri Popov, dmpop@linux.com
          License: GPLv3 https://www.gnu.org/licenses/gpl-3.0.txt -->
 
@@ -11,9 +14,10 @@ include('config.php');
 	<title><?php echo $title; ?></title>
 	<meta charset="utf-8">
 	<link rel="shortcut icon" href="favicon.png" />
+	<link rel="shortcut icon" href="favicon.png" />
+	<link rel="stylesheet" href="css/milligram.min.css">
+	<link rel="stylesheet" href="css/styles.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/classless.css" />
-	<link rel="stylesheet" href="css/themes.css" />
 	<!-- Suppress form re-submit prompt on refresh -->
 	<script>
 		if (window.history.replaceState) {
@@ -23,15 +27,14 @@ include('config.php');
 </head>
 
 <body>
-	<div class="card text-center">
+	<div style="text-align: center;">
 		<div style="margin-top: 1em; margin-bottom: 1em;">
-			<img style="display: inline; height: 2.5em; vertical-align: middle;" src="favicon.svg" alt="logo" />
+			<img style="display: inline; height: 3em; vertical-align: middle; margin-right: 0.5em;" src="favicon.svg" alt="logo" />
 			<h1 style="display: inline; margin-top: 0em; vertical-align: middle; letter-spacing: 3px;"><?php echo $title; ?></h1>
 		</div>
 		<hr style="margin-bottom: 2em;">
 		<table id="theTable">
 			<?php
-			$csv_file = "data.csv";
 			if (!is_file($csv_file)) {
 				$init_data = "Column 1; Column 2; Column 3\nField 1; Field 2; Field 3\n";
 				file_put_contents($csv_file, $init_data);
@@ -69,7 +72,7 @@ include('config.php');
 			?>
 			</tbody>
 		</table>
-		<button style="margin-bottom: 1.5em;" title="Edit link list" onclick='window.location.href = "edit.php"'><img style='vertical-align: middle;' src='svg/edit.svg' /></button>
+		<button style="margin-top: 1.5em; margin-bottom: 1.5em;" onclick='window.location.href = "edit.php"'>Edit</button>
 		<div style="margin-bottom: 1em;">
 			<?php echo $footer; ?>
 		</div>

@@ -30,7 +30,7 @@ if ($protect) {
 	<div style="text-align: center;">
 		<div style="margin-top: 1em; margin-bottom: 1em;">
 			<img style="display: inline; height: 3em; vertical-align: middle; margin-right: 0.5em;" src="favicon.svg" alt="logo" />
-			<h1 style="display: inline; margin-top: 0em; vertical-align: middle; letter-spacing: 3px;"><?php echo $title; ?></h1>
+			<h1 style="display: inline; margin-top: 0em; vertical-align: middle;"><?php echo $title; ?></h1>
 		</div>
 		<hr style="margin-bottom: 2em;">
 		<table id="theTable">

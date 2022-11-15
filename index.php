@@ -15,7 +15,7 @@ if ($protect) {
 	<meta charset="utf-8">
 	<link rel="shortcut icon" href="favicon.png" />
 	<link rel="shortcut icon" href="favicon.png" />
-	<link rel="stylesheet" href="css/milligram.min.css">
+	<link rel="stylesheet" href="css/picnic.min.css">
 	<link rel="stylesheet" href="css/styles.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Suppress form re-submit prompt on refresh -->
@@ -32,7 +32,6 @@ if ($protect) {
 			<img style="display: inline; height: 3em; vertical-align: middle; margin-right: 0.5em;" src="favicon.svg" alt="logo" />
 			<h1 style="display: inline; margin-top: 0em; vertical-align: middle;"><?php echo $title; ?></h1>
 		</div>
-		<hr style="margin-bottom: 2em;">
 		<table id="theTable">
 			<?php
 			if (!is_file($csv_file)) {

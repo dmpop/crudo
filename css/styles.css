@@ -23,8 +23,7 @@ table {
   border-spacing: 5px;
   margin: 0px auto;
   text-align: left;
-  width: 100%;
-  max-width: 800px;
+  max-width: 90%;
 }
 
 .sortable {

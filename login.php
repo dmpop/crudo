@@ -19,7 +19,7 @@ if (isset($_POST['password']) && password_verify($_POST['password'], $pw_hash)) 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="favicon.png" />
-    <link rel="stylesheet" href="css/milligram.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
     <link rel="stylesheet" href="css/styles.css">
     <title><?php echo $title; ?></title>
 </head>
@@ -33,9 +33,8 @@ if (isset($_POST['password']) && password_verify($_POST['password'], $pw_hash)) 
         <form action="" method="POST">
             <label>Password:</label>
             <input style="width: 15em;" type="password" name="password"><br />
-            <button type="submit" name="submit">Log in</button>
+            <button style="margin-top: 1em; margin-bottom: 1 em;" type="submit" name="submit">Log in</button>
         </form>
-        <hr style="margin-top: 2em; margin-bottom: 1.5em;">
         <?php echo $footer; ?>
     </div>
 </body>

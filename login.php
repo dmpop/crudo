@@ -1,5 +1,5 @@
 <?php
-$config = include('config.php');
+$config = include('inc/config.php');
 $pw_hash = password_hash($password, PASSWORD_DEFAULT);
 
 if ($protect) {

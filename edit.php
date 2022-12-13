@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ERROR);
-include('config.php');
+include('inc/config.php');
+include 'inc/parsedown.php';
 if ($protect) {
 	require_once('protect.php');
 }
@@ -28,33 +29,32 @@ if ($protect) {
 			<img style="display: inline; height: 3em; vertical-align: middle; margin-right: 0.5em;" src="favicon.svg" alt="logo" />
 			<h1 style="display: inline; margin-top: 0em; vertical-align: middle;"><?php echo $title; ?></h1>
 		</div>
-		<button onclick="location.href='index.php'">Back</button>
+		<div style="margin-bottom: 1.3em; margin-top: 1.3em;"><a href="index.php?d=<?php echo $_SESSION['dir']; ?>">Back</a></div>
 		<?php
 		function Read()
 		{
-			global $csv_file;
-			echo file_get_contents($csv_file);
+
+			$csvfile = $_SESSION["dir"] . DIRECTORY_SEPARATOR . "data.csv";
+			echo file_get_contents($csvfile);
 		}
 		function Write()
 		{
-			global $csv_file;
+			$csvfile = $_SESSION["dir"] . DIRECTORY_SEPARATOR . "data.csv";
 			$data = $_POST["text"];
-			file_put_contents($csv_file, $data);
+			file_put_contents($csvfile, $data);
 		}
 		?>
 		<?php
 		if (isset($_POST["save"])) {
 			Write();
-			echo "<script>
-            popup('Changes have been saved');
-            </script>";
+			echo "<script>";
+			echo 'popup("Changes have been saved");';
+			echo "</script>";
 		};
 		?>
 		<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
-			<div>
-				<textarea name="text"><?php Read(); ?></textarea>
-			</div>
-			<button type="submit" name="save">Save</button>
+			<textarea name="text"><?php Read(); ?></textarea><br /><br />
+			<button style="margin-bottom: 1.5em;" type="submit" name="save">Save</button>
 		</form>
 		<div style="margin-bottom: 1em;">
 			<?php echo $footer; ?>

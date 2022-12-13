@@ -2,7 +2,7 @@
 // Title
 $title = "Crudo";
 // Data file
-$csv_file = "data.csv";
+$root_dir = "Tables";
 // Delimiter
 $delimiter = ";";
 // Enable password protection

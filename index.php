@@ -1,7 +1,32 @@
 <?php
-include('config.php');
+include('inc/config.php');
+include 'inc/parsedown.php';
 if ($protect) {
 	require_once('protect.php');
+}
+
+if (!file_exists($root_dir)) {
+	mkdir($root_dir, 0755, true);
+}
+
+function deleteDirectory($dir)
+{
+	if (!file_exists($dir)) {
+		return true;
+	}
+	if (!is_dir($dir)) {
+		return unlink($dir);
+	}
+	foreach (scandir($dir) as $item) {
+		if ($item == '.' || $item == '..') {
+			continue;
+		}
+
+		if (!deleteDirectory($dir . DIRECTORY_SEPARATOR . $item)) {
+			return false;
+		}
+	}
+	return rmdir($dir);
 }
 ?>
 
@@ -32,8 +57,52 @@ if ($protect) {
 			<img style="display: inline; height: 3em; vertical-align: middle; margin-right: 0.5em;" src="favicon.svg" alt="logo" />
 			<h1 style="display: inline; margin-top: 0em; vertical-align: middle;"><?php echo $title; ?></h1>
 		</div>
-		<table id="theTable">
+		<?php
+		// Start session
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+		// The $d parameter is used to detect a subdirectory
+		if (isset($_GET['d'])) {
+			$current_dir = $_GET['d'];
+		} else {
+			$current_dir = $root_dir;
+		}
+		$_SESSION["dir"] = $current_dir;
+		$sub_dirs = array_filter(glob($current_dir . DIRECTORY_SEPARATOR . '*'), 'is_dir');
+		// Generate sub-directory navigation
+		if ((count($sub_dirs)) > 0 or (!empty($current_dir))) {
+			$higher_dirs = explode("/", $current_dir);
+			$higher_dir_cascade = "";
+			foreach ($higher_dirs as $higher_dir) {
+				if (!empty($higher_dir)) {
+					if (!empty($higher_dir_cascade)) {
+						$higher_dir_cascade = $higher_dir_cascade . DIRECTORY_SEPARATOR;
+					}
+					$higher_dir_cascade = $higher_dir_cascade . $higher_dir;
+					echo "<a href='"  . basename($_SERVER['PHP_SELF']) . "?d=" . $higher_dir_cascade . "'>" . $higher_dir . "</a> /&nbsp;";
+				}
+			}
+			// Populate a drop-down list with subdirectories
+			echo '<select style="width: auto; min-width: 7em;" name="" onchange="javascript:location.href = this.value;">';
+			echo '<option value="Default">Select table</option>';
+			foreach ($sub_dirs as $dir) {
+				setlocale(LC_ALL, 'C.UTF-8');
+				$dir_name = basename($dir);
+				$dir_option = str_replace('\'', '&apos;', $current_dir . DIRECTORY_SEPARATOR . $dir_name);
+				echo "<option value='?d=" . ltrim($dir_option, '/') . "'>" . $dir_name . "</option>";
+			}
+			echo "</select>";
+		}
+		?>
+		<form style='display: inline;' method='POST' action=''>
+			<input style='display: inline; width: 9em; margin-left: 0.5em;' type='text' name='table'>
+			<input class="button" style='display: inline; margin-left: 0.5em; margin-right: 0.5em;' type='submit' name='add' value='Add'>
+		</form>
+		<table style="margin-top: 1em;" id="theTable">
 			<?php
+			// Read CSV file
+			$csv_file = $current_dir . DIRECTORY_SEPARATOR . "data.csv";
 			if (!is_file($csv_file)) {
 				$init_data = "Column 1; Column 2; Column 3\nField 1; Field 2; Field 3\n";
 				file_put_contents($csv_file, $init_data);
@@ -42,6 +111,7 @@ if ($protect) {
 			if (($handle = fopen($csv_file, "r")) !== FALSE) {
 				while (($data = fgetcsv($handle, 0, $delimiter)) !== FALSE) {
 					$num = count($data);
+					$Parsedown = new Parsedown();
 					if ($row == 1) {
 						echo '<thead><tr>';
 					} else {
@@ -54,9 +124,9 @@ if ($protect) {
 							$value = $data[$c];
 						}
 						if ($row == 1) {
-							echo '<th "sortable" onclick="sortTable(' . $c . ')">' . $value . '</th>';
+							echo '<th "sortable" onclick="sortTable(' . $c . ')">' . $Parsedown->text($value) . '</th>';
 						} else {
-							echo '<td class="text-left">' . $value . '</td>';
+							echo '<td class="text-left">' . $Parsedown->text($value) . '</td>';
 						}
 					}
 					if ($row == 1) {
@@ -67,10 +137,26 @@ if ($protect) {
 					$row++;
 				}
 				fclose($handle);
+			} else {
+				echo "<div style='margin-top: 1em; margin-bottom: 1.5em;'>So empty here. Press the <strong>Edit</strong> button to add tables.</div>";
+			}
+			if (isset($_POST["add"]) && !empty($_POST["table"])) {
+				// Create new directory
+				mkdir($current_dir . DIRECTORY_SEPARATOR . $_POST["table"], 0755, true);
+			}
+			if (isset($_POST["delete"])) {
+				// Remove existing directory
+				echo "<div style='margin: auto; margin-top: 1.5em; border: 1px solid #969696; border-radius: 5px; width: 15em;'>Do you really want to delete this place? <form method='POST' action=''><input class='error' type='submit' name='confirm' value='Yes'></form></div>";
+			}
+			if (isset($_POST["confirm"])) {
+				deleteDirectory($current_dir);
 			}
 			?>
 			</tbody>
 		</table>
+		<form style='display: inline;' method='POST' action=''>
+			<input class="error" style='display: inline; margin-right: 0.5em;' type='submit' name='delete' value='Delete'>
+		</form>
 		<button style="margin-top: 1.5em; margin-bottom: 1.5em;" onclick='window.location.href = "edit.php"'>Edit</button>
 		<div style="margin-bottom: 1em;">
 			<?php echo $footer; ?>

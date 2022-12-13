@@ -143,13 +143,25 @@ function deleteDirectory($dir)
 			if (isset($_POST["add"]) && !empty($_POST["table"])) {
 				// Create new directory
 				mkdir($current_dir . DIRECTORY_SEPARATOR . $_POST["table"], 0755, true);
+				ob_start();
+				while (ob_get_status()) {
+					ob_end_clean();
+				}
+				$url = "index.php?d=" . $current_dir . DIRECTORY_SEPARATOR . $_POST['table'];
+				header("Location:$url");
 			}
 			if (isset($_POST["delete"])) {
 				// Remove existing directory
-				echo "<div style='margin: auto; margin-top: 1.5em; border: 1px solid #969696; border-radius: 5px; width: 15em;'>Do you really want to delete this place? <form method='POST' action=''><input class='error' type='submit' name='confirm' value='Yes'></form></div>";
+				echo "<div style='margin: auto; margin-top: 1.5em; border: 1px solid #969696; border-radius: 5px; width: 15em;'>Do you really want to delete this table? <form method='POST' action=''><input class='error' type='submit' name='confirm' value='Yes'></form></div>";
 			}
 			if (isset($_POST["confirm"])) {
 				deleteDirectory($current_dir);
+				ob_start();
+				while (ob_get_status()) {
+					ob_end_clean();
+				}
+				$url = "index.php?d=" . $root_dir;
+				header("Location:$url");
 			}
 			?>
 			</tbody>

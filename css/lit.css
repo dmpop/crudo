@@ -111,9 +111,8 @@ a {
 
 td,
 th {
-    padding: 1em;
+    padding: .3em;
     text-align: left;
-    border-bottom: solid #eee
 }
 
 .btn {

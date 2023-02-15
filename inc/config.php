@@ -10,4 +10,4 @@ $protect = true;
 // Password
 $password = "secret";
 // Footer
-$footer = "💡 Read <a href='https://gumroad.com/l/linux-photography'>Linux Photography</a> book";
+$footer = "This is <a href='https://github.com/dmpop/crudo'>Crudo</a>. I really 🧡 <a href='https://www.paypal.com/paypalme/dmpop'>coffee</a>";

@@ -20,7 +20,19 @@
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
-     id="defs2" />
+     id="defs2">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath1138">
+      <circle
+         style="opacity:0.5;fill:#e6e6e6;fill-opacity:1;stroke:none;stroke-width:3.614;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="circle1140"
+         cx="186.7963"
+         cy="543.07617"
+         r="66.145836"
+         transform="rotate(90)" />
+    </clipPath>
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -30,7 +42,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
      inkscape:cx="-85.714286"
-     inkscape:cy="400"
+     inkscape:cy="398.57143"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -63,7 +75,8 @@
      transform="translate(610.80953,-119.06298)">
     <g
        id="g832"
-       transform="rotate(-90,-543.07619,186.79632)">
+       transform="rotate(-90,-543.07618,186.79633)"
+       clip-path="url(#clipPath1138)">
       <rect
          style="fill:#f0e6ef;fill-opacity:1;stroke-width:2.60014"
          id="rect935-3-6-7-6"

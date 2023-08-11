@@ -113,6 +113,7 @@ td,
 th {
     padding: .3em;
     text-align: left;
+    vertical-align: baseline;
 }
 
 .btn {

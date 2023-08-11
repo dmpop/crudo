@@ -55,7 +55,7 @@ if ($protect) {
 				};
 				?>
 				<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
-					<textarea name="text"><?php Read(); ?></textarea><br /><br />
+					<textarea class="card w-100" name="text"><?php Read(); ?></textarea><br /><br />
 					<button class="btn primary" type="submit" name="save">Save</button>
 				</form>
 			</div>

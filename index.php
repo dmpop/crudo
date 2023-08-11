@@ -32,7 +32,7 @@ function deleteDirectory($dir)
 
 <!DOCTYPE html>
 <html lang="en">
-<!-- Author: Dmitri Popov, dmpop@linux.com
+<!-- Author: Dmitri Popov, dmpop@cameracode.coffee
          License: GPLv3 https://www.gnu.org/licenses/gpl-3.0.txt -->
 
 <head>
